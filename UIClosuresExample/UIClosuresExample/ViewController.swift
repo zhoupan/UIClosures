@@ -19,7 +19,9 @@ class ViewController: UIViewController {
         button.setTitle("Try Me", forState: UIControlState.Normal)
         button.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
         self.view.addSubview(button)
-        button.addListener(UIControlEvents.TouchUpInside, listener: { (sender) -> Void in
+        button.addListener(UIControlEvents.TouchUpInside, listener: {[unowned self] (sender) -> Void in
+            self.title = "New Viewcontroller title"
+            let button = sender as! UIButton
             button.setTitle("Tested!", forState: UIControlState.Normal)
         })
         button.addListener(UIControlEvents.TouchUpInside, listener: {[weak btn = button] (sender) -> Void in
