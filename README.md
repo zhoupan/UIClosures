@@ -26,7 +26,7 @@ Be sure to check out our [SwiftRecord](https://github.com/arkverse/SwiftRecord) 
 		platform :ios, '8.0'
 		use_frameworks!
 	
-		pod 'UIClosures'
+		pod 'UIClosures', '~> 0.0.2'
 2. run `pod install`
 
 #### via Carthage
