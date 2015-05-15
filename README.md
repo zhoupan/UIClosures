@@ -18,6 +18,12 @@ button.on(.TouchUpInside, (sender: AnyObject) -> () {
 
 Be sure to check out our [SwiftRecord](https://github.com/arkverse/SwiftRecord) library too!
 
+If you love UIClosures, tweet it! <a href="https://twitter.com/intent/tweet?text=UIClosures&url=https%3A%2F%2Fgithub.com%2Farkverse%2FUIClosures&hashtags=ios%2Cswift%2Cclosures%2Cuikit&original_referer=http%3A%2F%2Fgithub.com%2F&tw_p=tweetbutton" target="_blank">
+  <img src="http://jpillora.com/github-twitter-button/img/tweet.png"
+       alt="tweet button" title="UIClosures"></img>
+</a>
+
+
 ## Installation
 
 #### via [CocoaPods](http://cocoapods.org)
@@ -89,3 +95,5 @@ UIClosures is available under the MIT license. See the LICENSE file
 for more information.
 
 Check out [ark](http://www.arkverse.com) for more about us and check out our other Swift libraries
+
+![ga tracker](https://www.google-analytics.com/collect?v=1&a=257770996&t=pageview&dl=https%3A%2F%2Fgithub.com%2Farkverse%2FUIClosures&ul=en-us&de=UTF-8&cid=978224512.1377738459&tid=UA-63011921-2&z=887657232 "ga tracker")
