@@ -1,4 +1,4 @@
-# UIClosures [![CocoaPod][pd-bdg]][pd] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+# UIClosures [![CocoaPod][pd-bdg]][pd] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)[![Issues](http://img.shields.io/github/issues/arkverse/UIClosures.svg)]( https://github.com/arkverse/UIClosures/issues)
 by [ark](http://www.arkverse.com)
 [pd-bdg]: https://img.shields.io/cocoapods/v/UIClosures.svg
 [pd]: http://cocoadocs.org/docsets/UIClosures
