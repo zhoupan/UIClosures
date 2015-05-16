@@ -1,8 +1,8 @@
 # UIClosures [![CocoaPod][pd-bdg]][pd] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)[![Issues](http://img.shields.io/github/issues/arkverse/UIClosures.svg)]( https://github.com/arkverse/UIClosures/issues)
-by [ark](http://www.arkverse.com)
+by [ark](http://www.arkverse.com). tweet [@arkverse](https://twitter.com/arkverse) for any feature requests. Feedback is greatly appreciated!
 [pd-bdg]: https://img.shields.io/cocoapods/v/UIClosures.svg
 [pd]: http://cocoadocs.org/docsets/UIClosures
-
+## About
 A Swift closure library for UIKit that makes events significantly easier and cleaner. Currently supports closures on `UIControl` events and `UIGestureRecognizers` (all subclasses). We will be adding more closure support as we go along. Memory managed and written completely in Swift.
 
 All the `UIControlEvents` are supported, and multiple closures can be added to the same event.
