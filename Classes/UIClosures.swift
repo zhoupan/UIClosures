@@ -130,102 +130,19 @@ public class ArkUI {
     static var swipeListeners = Dictionary<WeakKey<UISwipeGestureRecognizer>,Array<(gestureRecognizer: UISwipeGestureRecognizer) -> ()>>()
     static var tapListeners = Dictionary<WeakKey<UITapGestureRecognizer>,Array<(gestureRecognizer: UITapGestureRecognizer) -> ()>>()
     
-    static func addGesture(gesture: UIGestureRecognizer, listener: (gestureRecognizer: UIGestureRecognizer) -> ()) {
+    static func addGesture<T: UIGestureRecognizer>(gesture: T, listener: (gestureRecognizer: T) -> (),inout gestureListeners: Dictionary<WeakKey<T>,Array<(gestureRecognizer: T) -> ()>> ) {
         WeakCollections.clean(&gestureListeners)
         let gestureKey = WeakCollections.weakKeyOrNew(gesture, dict: gestureListeners)
-        var listeners = gestureListeners[gestureKey]
-        if listeners == nil {
-            listeners = Array<(gestureRecognizer: UIGestureRecognizer) -> ()>()
-            gestureListeners[gestureKey] = listeners
+        var listenersForKey = gestureListeners[gestureKey]
+        if listenersForKey == nil {
+            listenersForKey = Array<(gestureRecognizer: T) -> ()>()
+            gestureListeners[gestureKey] = listenersForKey
         }
-        listeners!.append(listener)
-        gestureListeners[gestureKey] = listeners
+        listenersForKey!.append(listener)
+        gestureListeners[gestureKey] = listenersForKey
     }
-    
-    static func addGesture(gesture: UIPanGestureRecognizer, listener: (gestureRecognizer: UIPanGestureRecognizer) -> ()) {
-        WeakCollections.clean(&panListeners)
-        let gestureKey = WeakCollections.weakKeyOrNew(gesture, dict: panListeners)
-        var listeners = panListeners[gestureKey]
-        if listeners == nil {
-            listeners = Array<(gestureRecognizer: UIPanGestureRecognizer) -> ()>()
-            panListeners[gestureKey] = listeners
-        }
-        listeners!.append(listener)
-        panListeners[gestureKey] = listeners
-    }
-    
-    static func addGesture(gesture: UISwipeGestureRecognizer, listener: (gestureRecognizer: UISwipeGestureRecognizer) -> ()) {
-        var gestureListeners = swipeListeners
-        WeakCollections.clean(&gestureListeners)
-        let gestureKey = WeakCollections.weakKeyOrNew(gesture, dict: gestureListeners)
-        var listeners = gestureListeners[gestureKey]
-        if listeners == nil {
-            listeners = Array<(gestureRecognizer: UISwipeGestureRecognizer) -> ()>()
-            gestureListeners[gestureKey] = listeners
-        }
-        listeners!.append(listener)
-        gestureListeners[gestureKey] = listeners
-        self.swipeListeners = gestureListeners
-    }
-    
-    static func addGesture(gesture: UITapGestureRecognizer, listener: (gestureRecognizer: UITapGestureRecognizer) -> ()) {
-        var gestureListeners = tapListeners
-        println("add tap gesture")
-        WeakCollections.clean(&gestureListeners)
-        let gestureKey = WeakCollections.weakKeyOrNew(gesture, dict: gestureListeners)
-        var listeners = gestureListeners[gestureKey]
-        if listeners == nil {
-            listeners = Array<(gestureRecognizer: UITapGestureRecognizer) -> ()>()
-            gestureListeners[gestureKey] = listeners
-        }
-        listeners!.append(listener)
-        gestureListeners[gestureKey] = listeners
-        self.tapListeners = gestureListeners
-    }
-    
-    static func addGesture(gesture: UIPinchGestureRecognizer, listener: (gestureRecognizer: UIPinchGestureRecognizer) -> ()) {
-        var gestureListeners = pinchListeners
-        WeakCollections.clean(&gestureListeners)
-        let gestureKey = WeakCollections.weakKeyOrNew(gesture, dict: gestureListeners)
-        var listeners = gestureListeners[gestureKey]
-        if listeners == nil {
-            listeners = Array<(gestureRecognizer: UIPinchGestureRecognizer) -> ()>()
-            gestureListeners[gestureKey] = listeners
-        }
-        listeners!.append(listener)
-        gestureListeners[gestureKey] = listeners
-        self.pinchListeners = gestureListeners
-    }
-    
-    static func addGesture(gesture: UILongPressGestureRecognizer, listener: (gestureRecognizer: UILongPressGestureRecognizer) -> ()) {
-        var gestureListeners = longPressListeners
-        WeakCollections.clean(&gestureListeners)
-        let gestureKey = WeakCollections.weakKeyOrNew(gesture, dict: gestureListeners)
-        var listeners = gestureListeners[gestureKey]
-        if listeners == nil {
-            listeners = Array<(gestureRecognizer: UILongPressGestureRecognizer) -> ()>()
-            gestureListeners[gestureKey] = listeners
-        }
-        listeners!.append(listener)
-        gestureListeners[gestureKey] = listeners
-        self.longPressListeners = gestureListeners
-    }
-    
-    static func addGesture(gesture: UIRotationGestureRecognizer, listener: (gestureRecognizer: UIRotationGestureRecognizer) -> ()) {
-        var gestureListeners = rotationListeners
-        WeakCollections.clean(&gestureListeners)
-        let gestureKey = WeakCollections.weakKeyOrNew(gesture, dict: gestureListeners)
-        var listeners = gestureListeners[gestureKey]
-        if listeners == nil {
-            listeners = Array<(gestureRecognizer: UIRotationGestureRecognizer) -> ()>()
-            gestureListeners[gestureKey] = listeners
-        }
-        listeners!.append(listener)
-        gestureListeners[gestureKey] = listeners
-        self.rotationListeners = gestureListeners
-    }
-    
-    static func removeGesture(gesture: UIGestureRecognizer, listener:(gestureRecognizer: UIGestureRecognizer) -> () ) {
+
+    static func removeGesture<T: UIGestureRecognizer>(gesture: T, listener:(gestureRecognizer: T) -> (),inout gestureListeners: Dictionary<WeakKey<T>,Array<(gestureRecognizer: T) -> ()>> ) {
         WeakCollections.clean(&gestureListeners)
         if let gestureKey = WeakCollections.weakKey(gesture, dictionary: gestureListeners) {
             var lists = gestureListeners[gestureKey]!
@@ -240,163 +157,41 @@ public class ArkUI {
                 gestureListeners[gestureKey] = lists
             }
         }
-    }
-    
-    static func removeGesture(gesture: UITapGestureRecognizer, listener:(gestureRecognizer: UITapGestureRecognizer) -> () ) {
-        var gestureListeners = tapListeners
-        WeakCollections.clean(&gestureListeners)
-        if let gestureKey = WeakCollections.weakKey(gesture, dictionary: gestureListeners) {
-            var lists = gestureListeners[gestureKey]!
-            var indexForRemove = -1
-            for (index, list) in enumerate(lists) {
-                if list === listener {
-                    indexForRemove = index
-                }
-            }
-            if indexForRemove > -1 {
-                let f = lists.removeAtIndex(indexForRemove)
-                gestureListeners[gestureKey] = lists
-            }
-        }
-        self.tapListeners = gestureListeners
-    }
-    
-    static func removeGesture(gesture: UIPanGestureRecognizer, listener:(gestureRecognizer: UIPanGestureRecognizer) -> () ) {
-        var gestureListeners = panListeners
-        WeakCollections.clean(&gestureListeners)
-        if let gestureKey = WeakCollections.weakKey(gesture, dictionary: gestureListeners) {
-            var lists = gestureListeners[gestureKey]!
-            var indexForRemove = -1
-            for (index, list) in enumerate(lists) {
-                if list === listener {
-                    indexForRemove = index
-                }
-            }
-            if indexForRemove > -1 {
-                let f = lists.removeAtIndex(indexForRemove)
-                gestureListeners[gestureKey] = lists
-            }
-        }
-        self.panListeners = gestureListeners
-    }
-    
-    static func removeGesture(gesture: UISwipeGestureRecognizer, listener:(gestureRecognizer: UISwipeGestureRecognizer) -> () ) {
-        var gestureListeners = swipeListeners
-        WeakCollections.clean(&gestureListeners)
-        if let gestureKey = WeakCollections.weakKey(gesture, dictionary: gestureListeners) {
-            var lists = gestureListeners[gestureKey]!
-            var indexForRemove = -1
-            for (index, list) in enumerate(lists) {
-                if list === listener {
-                    indexForRemove = index
-                }
-            }
-            if indexForRemove > -1 {
-                let f = lists.removeAtIndex(indexForRemove)
-                gestureListeners[gestureKey] = lists
-            }
-        }
-        self.swipeListeners = gestureListeners
-    }
-    
-    static func removeGesture(gesture: UIPinchGestureRecognizer, listener:(gestureRecognizer: UIPinchGestureRecognizer) -> () ) {
-        var gestureListeners = pinchListeners
-        WeakCollections.clean(&gestureListeners)
-        if let gestureKey = WeakCollections.weakKey(gesture, dictionary: gestureListeners) {
-            var lists = gestureListeners[gestureKey]!
-            var indexForRemove = -1
-            for (index, list) in enumerate(lists) {
-                if list === listener {
-                    indexForRemove = index
-                }
-            }
-            if indexForRemove > -1 {
-                let f = lists.removeAtIndex(indexForRemove)
-                gestureListeners[gestureKey] = lists
-            }
-        }
-        self.pinchListeners = gestureListeners
-    }
-    
-    static func removeGesture(gesture: UIRotationGestureRecognizer, listener:(gestureRecognizer: UIRotationGestureRecognizer) -> () ) {
-        var gestureListeners = rotationListeners
-        WeakCollections.clean(&gestureListeners)
-        if let gestureKey = WeakCollections.weakKey(gesture, dictionary: gestureListeners) {
-            var lists = gestureListeners[gestureKey]!
-            var indexForRemove = -1
-            for (index, list) in enumerate(lists) {
-                if list === listener {
-                    indexForRemove = index
-                }
-            }
-            if indexForRemove > -1 {
-                let f = lists.removeAtIndex(indexForRemove)
-                gestureListeners[gestureKey] = lists
-            }
-        }
-        self.rotationListeners = gestureListeners
-    }
-    
-    static func removeGesture(gesture: UILongPressGestureRecognizer, listener:(gestureRecognizer: UILongPressGestureRecognizer) -> () ) {
-        var gestureListeners = longPressListeners
-        WeakCollections.clean(&gestureListeners)
-        if let gestureKey = WeakCollections.weakKey(gesture, dictionary: gestureListeners) {
-            var lists = gestureListeners[gestureKey]!
-            var indexForRemove = -1
-            for (index, list) in enumerate(lists) {
-                if list === listener {
-                    indexForRemove = index
-                }
-            }
-            if indexForRemove > -1 {
-                let f = lists.removeAtIndex(indexForRemove)
-                gestureListeners[gestureKey] = lists
-            }
-        }
-        self.longPressListeners = gestureListeners
     }
     
     public static dynamic func handleGesture(gesture: UIGestureRecognizer) {
         println("handle gesture")
-        if gesture is UITapGestureRecognizer {
-            println("have tap gesture")
-            println(tapListeners.count)
-            let gest = gesture as! UITapGestureRecognizer
+        if let gest = gesture as? UITapGestureRecognizer {
             if let lists = WeakCollections.valueForWeakKey(gest, dict: tapListeners) {
                 for f in lists {
                     f(gestureRecognizer: gest)
                 }
             }
-        } else if gesture is UIPinchGestureRecognizer {
-            let gest = gesture as! UIPinchGestureRecognizer
+        } else if let gest = gesture as? UIPinchGestureRecognizer {
             if let lists = WeakCollections.valueForWeakKey(gest, dict: pinchListeners) {
                 for f in lists {
                     f(gestureRecognizer: gest)
                 }
             }
-        } else if gesture is UILongPressGestureRecognizer {
-            let gest = gesture as! UILongPressGestureRecognizer
+        } else if let gest = gesture as? UILongPressGestureRecognizer {
             if let lists = WeakCollections.valueForWeakKey(gest, dict: longPressListeners) {
                 for f in lists {
                     f(gestureRecognizer: gest)
                 }
             }
-        } else if gesture is UIPanGestureRecognizer {
-            let gest = gesture as! UIPanGestureRecognizer
+        } else if let gest = gesture as? UIPanGestureRecognizer {
             if let lists = WeakCollections.valueForWeakKey(gest, dict: panListeners) {
                 for f in lists {
                     f(gestureRecognizer: gest)
                 }
             }
-        } else if gesture is UIRotationGestureRecognizer {
-            let gest = gesture as! UIRotationGestureRecognizer
+        } else if let gest = gesture as? UIRotationGestureRecognizer {
             if let lists = WeakCollections.valueForWeakKey(gest, dict: rotationListeners) {
                 for f in lists {
                     f(gestureRecognizer: gest)
                 }
             }
-        } else if gesture is UISwipeGestureRecognizer {
-            let gest = gesture as! UISwipeGestureRecognizer
+        } else if let gest = gesture as? UISwipeGestureRecognizer {
             if let lists = WeakCollections.valueForWeakKey(gest, dict: swipeListeners) {
                 for f in lists {
                     f(gestureRecognizer: gest)
@@ -588,32 +383,34 @@ public extension UIControl {
 public extension UIGestureRecognizer {
     public convenience init(_ listener:(gestureRecognizer: UIGestureRecognizer) -> () ) {
         self.init(target: ArkUI.self, action: "handleGesture:")
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.gestureListeners)
     }
-    public func onGesture(listener:(gestureRecognizer: UIGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+    public func onGesture<T:UIGestureRecognizer>(listener:(gestureRecognizer: UIGestureRecognizer) -> () ) {
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.gestureListeners)
     }
     public func addListener(listener:(gestureRecognizer: UIGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.gestureListeners)
     }
     public func removeListener(listener:(gestureRecognizer: UIGestureRecognizer) -> () ) {
-        ArkUI.removeGesture(self, listener: listener)
+        ArkUI.removeGesture(self, listener: listener, gestureListeners: &ArkUI.gestureListeners)
     }
 }
+
+
 
 public extension UITapGestureRecognizer {
     public convenience init(_ listener:(gestureRecognizer: UITapGestureRecognizer) -> () ) {
         self.init(target: ArkUI.self, action: "handleGesture:")
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.tapListeners)
     }
     public override func onGesture(listener:(gestureRecognizer: UITapGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.tapListeners)
     }
     public override func addListener(listener:(gestureRecognizer: UITapGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.tapListeners)
     }
     public override func removeListener(listener:(gestureRecognizer: UITapGestureRecognizer) -> () ) {
-        ArkUI.removeGesture(self, listener: listener)
+        ArkUI.removeGesture(self, listener: listener, gestureListeners: &ArkUI.tapListeners)
     }
 
 }
@@ -621,80 +418,80 @@ public extension UITapGestureRecognizer {
 public extension UILongPressGestureRecognizer {
     public convenience init(_ listener:(gestureRecognizer: UILongPressGestureRecognizer) -> () ) {
         self.init(target: ArkUI.self, action: "handleGesture:")
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.longPressListeners)
     }
     public override func onGesture(listener:(gestureRecognizer: UILongPressGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.longPressListeners)
     }
     public override func addListener(listener:(gestureRecognizer: UILongPressGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.longPressListeners)
     }
     public override func removeListener(listener:(gestureRecognizer: UILongPressGestureRecognizer) -> () ) {
-        ArkUI.removeGesture(self, listener: listener)
+        ArkUI.removeGesture(self, listener: listener, gestureListeners: &ArkUI.longPressListeners)
     }
 }
 
 public extension UIPanGestureRecognizer {
     public convenience init(_ listener:(gestureRecognizer: UIPanGestureRecognizer) -> () ) {
         self.init(target: ArkUI.self, action: "handleGesture:")
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.panListeners)
     }
     public override func onGesture(listener:(gestureRecognizer: UIPanGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.panListeners)
     }
     public override func addListener(listener:(gestureRecognizer: UIPanGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.panListeners)
     }
     public override func removeListener(listener:(gestureRecognizer: UIPanGestureRecognizer) -> () ) {
-        ArkUI.removeGesture(self, listener: listener)
+        ArkUI.removeGesture(self, listener: listener, gestureListeners: &ArkUI.panListeners)
     }
 }
 
 public extension UIPinchGestureRecognizer {
     public convenience init(_ listener:(gestureRecognizer: UIPinchGestureRecognizer) -> () ) {
         self.init(target: ArkUI.self, action: "handleGesture:")
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.pinchListeners)
     }
     public override func onGesture(listener:(gestureRecognizer: UIPinchGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.pinchListeners)
     }
     public override func addListener(listener:(gestureRecognizer: UIPinchGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.pinchListeners)
     }
     public override func removeListener(listener:(gestureRecognizer: UIPinchGestureRecognizer) -> () ) {
-        ArkUI.removeGesture(self, listener: listener)
+        ArkUI.removeGesture(self, listener: listener, gestureListeners: &ArkUI.pinchListeners)
     }
 }
 
 public extension UIRotationGestureRecognizer {
     public convenience init(_ listener:(gestureRecognizer: UIRotationGestureRecognizer) -> () ) {
         self.init(target: ArkUI.self, action: "handleGesture:")
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.rotationListeners)
     }
     public override func onGesture(listener:(gestureRecognizer: UIRotationGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.rotationListeners)
     }
     public override func addListener(listener:(gestureRecognizer: UIRotationGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.rotationListeners)
     }
     public override func removeListener(listener:(gestureRecognizer: UIRotationGestureRecognizer) -> () ) {
-        ArkUI.removeGesture(self, listener: listener)
+        ArkUI.removeGesture(self, listener: listener, gestureListeners: &ArkUI.rotationListeners)
     }
 }
 
 public extension UISwipeGestureRecognizer {
     public convenience init(_ listener:(gestureRecognizer: UISwipeGestureRecognizer) -> () ) {
         self.init(target: ArkUI.self, action: "handleGesture:")
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.swipeListeners)
     }
     public override func onGesture(listener:(gestureRecognizer: UISwipeGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.swipeListeners)
     }
     public override func addListener(listener:(gestureRecognizer: UISwipeGestureRecognizer) -> () ) {
-        ArkUI.addGesture(self, listener: listener)
+        ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.swipeListeners)
     }
     public override func removeListener(listener:(gestureRecognizer: UISwipeGestureRecognizer) -> () ) {
-        ArkUI.removeGesture(self, listener: listener)
+        ArkUI.removeGesture(self, listener: listener, gestureListeners: &ArkUI.swipeListeners)
     }
 }
 
