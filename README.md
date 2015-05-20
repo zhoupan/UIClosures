@@ -18,6 +18,8 @@ button.on(.TouchUpInside, (sender: AnyObject) -> () {
 
 Be sure to check out our [SwiftRecord](https://github.com/arkverse/SwiftRecord) library too!
 
+Visit [ark](www.arkverse.com) for a more [beginner friendly guide to UIClosures](http://www.arkverse.com/release-uiclosures-closure-ui-events-library/)
+
 If you love UIClosures, tweet it! <a href="https://twitter.com/intent/tweet?text=UIClosures&url=https%3A%2F%2Fgithub.com%2Farkverse%2FUIClosures&hashtags=ios%2Cswift%2Cclosures%2Cuikit&original_referer=http%3A%2F%2Fgithub.com%2F&tw_p=tweetbutton" target="_blank">
   <img src="http://jpillora.com/github-twitter-button/img/tweet.png"
        alt="tweet button" title="UIClosures"></img>
