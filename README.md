@@ -41,7 +41,7 @@ If you love UIClosures, tweet it! <a href="https://twitter.com/intent/tweet?text
 
 1. Just add UIClosures to your Cartfile:
 
-	github "arkverse/UIClosures" >= 0.0.1
+		github "arkverse/UIClosures" >= 0.0.2
 	
 2. and run `carthage update`
 
