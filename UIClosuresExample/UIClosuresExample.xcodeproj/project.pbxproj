@@ -13,7 +13,6 @@
 		B87ABF391B05208300362BDB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B87ABF381B05208300362BDB /* Images.xcassets */; };
 		B87ABF3C1B05208300362BDB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B87ABF3A1B05208300362BDB /* LaunchScreen.xib */; };
 		B87ABF481B05208300362BDB /* UIClosuresExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87ABF471B05208300362BDB /* UIClosuresExampleTests.swift */; };
-		B87ABF541B0520EB00362BDB /* UIClosures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B87ABF531B0520EB00362BDB /* UIClosures.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +36,6 @@
 		B87ABF411B05208300362BDB /* UIClosuresExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UIClosuresExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B87ABF461B05208300362BDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B87ABF471B05208300362BDB /* UIClosuresExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIClosuresExampleTests.swift; sourceTree = "<group>"; };
-		B87ABF531B0520EB00362BDB /* UIClosures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIClosures.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/UIClosures-fcvsbvbuevqlsqdxhojbyftcaytq/Build/Products/Debug-iphoneos/UIClosures.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +43,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B87ABF541B0520EB00362BDB /* UIClosures.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +77,6 @@
 		B87ABF2E1B05208300362BDB /* UIClosuresExample */ = {
 			isa = PBXGroup;
 			children = (
-				B87ABF531B0520EB00362BDB /* UIClosures.framework */,
 				B87ABF311B05208300362BDB /* AppDelegate.swift */,
 				B87ABF331B05208300362BDB /* ViewController.swift */,
 				B87ABF351B05208300362BDB /* Main.storyboard */,
@@ -347,6 +343,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/UIClosures-fcvsbvbuevqlsqdxhojbyftcaytq/Build/Products/Debug-iphoneos",
+					"$(PROJECT_DIR)/UIClosuresExample",
 				);
 				INFOPLIST_FILE = UIClosuresExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -361,6 +358,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/UIClosures-fcvsbvbuevqlsqdxhojbyftcaytq/Build/Products/Debug-iphoneos",
+					"$(PROJECT_DIR)/UIClosuresExample",
 				);
 				INFOPLIST_FILE = UIClosuresExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -421,6 +419,7 @@
 				B87ABF4D1B05208300362BDB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B87ABF4E1B05208300362BDB /* Build configuration list for PBXNativeTarget "UIClosuresExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -429,6 +428,7 @@
 				B87ABF501B05208300362BDB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

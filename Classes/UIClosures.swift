@@ -385,7 +385,7 @@ public extension UIGestureRecognizer {
         self.init(target: ArkUI.self, action: "handleGesture:")
         ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.gestureListeners)
     }
-    public func onGesture<T:UIGestureRecognizer>(listener:(gestureRecognizer: UIGestureRecognizer) -> () ) {
+    public func onGesture(listener:(gestureRecognizer: UIGestureRecognizer) -> () ) {
         ArkUI.addGesture(self, listener: listener, gestureListeners: &ArkUI.gestureListeners)
     }
     public func addListener(listener:(gestureRecognizer: UIGestureRecognizer) -> () ) {
