@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "UIClosures"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "Swift closure library for UIKit"
 
   s.description  = <<-DESC
