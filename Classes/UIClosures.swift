@@ -79,7 +79,7 @@ public class ArkUI {
             for event in events {
                 if var evlisteners = viewListeners[event] {
                     var indexForRemove = -1
-                    for (index, list) in enumerate(evlisteners) {
+                    for (index, list) in evlisteners.enumerate() {
                         let listfix = list as (sender: AnyObject) -> ()
                         if listfix === listener {
                             indexForRemove = index
@@ -103,10 +103,10 @@ public class ArkUI {
                 if let evlisteners = viewlisteners[ev] {
                     
                 } else {
-                    view.addTarget(self, action: self.selector(ev), forControlEvents: UIControlEvents(ev.rawValue))
+                    view.addTarget(self, action: self.selector(ev), forControlEvents: UIControlEvents(rawValue: ev.rawValue))
                 }
             } else {
-                view.addTarget(self, action:self.selector(ev), forControlEvents: UIControlEvents(ev.rawValue))
+                view.addTarget(self, action:self.selector(ev), forControlEvents: UIControlEvents(rawValue: ev.rawValue))
             }
         }
     }
@@ -147,7 +147,7 @@ public class ArkUI {
         if let gestureKey = WeakCollections.weakKey(gesture, dictionary: gestureListeners) {
             var lists = gestureListeners[gestureKey]!
             var indexForRemove = -1
-            for (index, list) in enumerate(lists) {
+            for (index, list) in lists.enumerate() {
                 if list === listener {
                     indexForRemove = index
                 }
@@ -160,7 +160,7 @@ public class ArkUI {
     }
     
     public static dynamic func handleGesture(gesture: UIGestureRecognizer) {
-        println("handle gesture")
+        print("handle gesture")
         if let gest = gesture as? UITapGestureRecognizer {
             if let lists = WeakCollections.valueForWeakKey(gest, dict: tapListeners) {
                 for f in lists {
