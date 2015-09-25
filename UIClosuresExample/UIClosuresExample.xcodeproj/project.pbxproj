@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1928C0B31BB5D5EA007E7530 /* UIClosures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1928C0B21BB5D5EA007E7530 /* UIClosures.framework */; };
 		B87ABF321B05208300362BDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87ABF311B05208300362BDB /* AppDelegate.swift */; };
 		B87ABF341B05208300362BDB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87ABF331B05208300362BDB /* ViewController.swift */; };
 		B87ABF371B05208300362BDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87ABF351B05208300362BDB /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1928C0B21BB5D5EA007E7530 /* UIClosures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIClosures.framework; path = "../../../../Library/Developer/Xcode/DerivedData/UIClosures-auxdmvcxiejehcawrvnxmqzqpjom/Build/Products/Debug-iphoneos/UIClosures.framework"; sourceTree = "<group>"; };
 		B87ABF2C1B05208300362BDB /* UIClosuresExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIClosuresExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B87ABF301B05208300362BDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B87ABF311B05208300362BDB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1928C0B31BB5D5EA007E7530 /* UIClosures.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +62,7 @@
 		B87ABF231B05208300362BDB = {
 			isa = PBXGroup;
 			children = (
+				1928C0B21BB5D5EA007E7530 /* UIClosures.framework */,
 				B87ABF2E1B05208300362BDB /* UIClosuresExample */,
 				B87ABF441B05208300362BDB /* UIClosuresExampleTests */,
 				B87ABF2D1B05208300362BDB /* Products */,

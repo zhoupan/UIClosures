@@ -86,7 +86,7 @@ public class ArkUI {
                         }
                     }
                     if indexForRemove > -1 {
-                        let r = evlisteners.removeAtIndex(indexForRemove)
+                        _ = evlisteners.removeAtIndex(indexForRemove)
                         viewListeners[event] = evlisteners
                     }
                 }
@@ -100,7 +100,7 @@ public class ArkUI {
         for ev in events {
             if let viewKey = WeakCollections.weakKey(view, dictionary: listeners) {
                 let viewlisteners = listeners[viewKey]!
-                if let evlisteners = viewlisteners[ev] {
+                if let _ = viewlisteners[ev] {
                     
                 } else {
                     view.addTarget(self, action: self.selector(ev), forControlEvents: UIControlEvents(rawValue: ev.rawValue))
@@ -153,7 +153,7 @@ public class ArkUI {
                 }
             }
             if indexForRemove > -1 {
-                let f = lists.removeAtIndex(indexForRemove)
+                _ = lists.removeAtIndex(indexForRemove)
                 gestureListeners[gestureKey] = lists
             }
         }
@@ -497,7 +497,7 @@ public extension UISwipeGestureRecognizer {
 
 func peekFunc<A,R>(f:A->R)->(fp:Int, ctx:Int) {
     typealias IntInt = (Int, Int)
-    let (hi, lo) = unsafeBitCast(f, IntInt.self)
+    let (_, lo) = unsafeBitCast(f, IntInt.self)
     let offset = sizeof(Int) == 8 ? 16 : 12
     let ptr  = UnsafePointer<Int>(bitPattern: lo+offset)
     return (ptr.memory, ptr.successor().memory)
