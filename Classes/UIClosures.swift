@@ -79,14 +79,14 @@ public class ArkUI {
             for event in events {
                 if var evlisteners = viewListeners[event] {
                     var indexForRemove = -1
-                    for (index, list) in enumerate(evlisteners) {
+                    for (index, list) in evlisteners.enumerate() {
                         let listfix = list as (sender: AnyObject) -> ()
                         if listfix === listener {
                             indexForRemove = index
                         }
                     }
                     if indexForRemove > -1 {
-                        let r = evlisteners.removeAtIndex(indexForRemove)
+                        _ = evlisteners.removeAtIndex(indexForRemove)
                         viewListeners[event] = evlisteners
                     }
                 }
@@ -100,13 +100,13 @@ public class ArkUI {
         for ev in events {
             if let viewKey = WeakCollections.weakKey(view, dictionary: listeners) {
                 let viewlisteners = listeners[viewKey]!
-                if let evlisteners = viewlisteners[ev] {
+                if let _ = viewlisteners[ev] {
                     
                 } else {
-                    view.addTarget(self, action: self.selector(ev), forControlEvents: UIControlEvents(ev.rawValue))
+                    view.addTarget(self, action: self.selector(ev), forControlEvents: UIControlEvents(rawValue: ev.rawValue))
                 }
             } else {
-                view.addTarget(self, action:self.selector(ev), forControlEvents: UIControlEvents(ev.rawValue))
+                view.addTarget(self, action:self.selector(ev), forControlEvents: UIControlEvents(rawValue: ev.rawValue))
             }
         }
     }
@@ -147,20 +147,20 @@ public class ArkUI {
         if let gestureKey = WeakCollections.weakKey(gesture, dictionary: gestureListeners) {
             var lists = gestureListeners[gestureKey]!
             var indexForRemove = -1
-            for (index, list) in enumerate(lists) {
+            for (index, list) in lists.enumerate() {
                 if list === listener {
                     indexForRemove = index
                 }
             }
             if indexForRemove > -1 {
-                let f = lists.removeAtIndex(indexForRemove)
+                _ = lists.removeAtIndex(indexForRemove)
                 gestureListeners[gestureKey] = lists
             }
         }
     }
     
     public static dynamic func handleGesture(gesture: UIGestureRecognizer) {
-        println("handle gesture")
+        print("handle gesture")
         if let gest = gesture as? UITapGestureRecognizer {
             if let lists = WeakCollections.valueForWeakKey(gest, dict: tapListeners) {
                 for f in lists {
@@ -497,7 +497,7 @@ public extension UISwipeGestureRecognizer {
 
 func peekFunc<A,R>(f:A->R)->(fp:Int, ctx:Int) {
     typealias IntInt = (Int, Int)
-    let (hi, lo) = unsafeBitCast(f, IntInt.self)
+    let (_, lo) = unsafeBitCast(f, IntInt.self)
     let offset = sizeof(Int) == 8 ? 16 : 12
     let ptr  = UnsafePointer<Int>(bitPattern: lo+offset)
     return (ptr.memory, ptr.successor().memory)

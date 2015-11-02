@@ -24,11 +24,11 @@ class ViewController: UIViewController {
             let button = sender as! UIButton
             button.setTitle("Tested!", forState: UIControlState.Normal)
         })
-        button.onTouchUpInside() {[weak btn = button] (sender) -> Void in
+        button.onTouchUpInside() {(sender) -> Void in
             button.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
         }
-        let tap = UITapGestureRecognizer() {[unowned self, weak view = self.view] (gesture) -> () in
-            view?.backgroundColor = UIColor.greenColor()
+        let tap = UITapGestureRecognizer() {(gesture) -> () in
+            self.view.backgroundColor = UIColor.greenColor()
         }
         self.view.addGestureRecognizer(tap)
     }
